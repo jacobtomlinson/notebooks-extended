@@ -1,0 +1,20 @@
+name: dask
+channels:
+  - defaults
+  - conda-forge
+  - nvidia 
+  - rapidsai 
+  - numba 
+  - pytorch
+    
+dependencies:
+  - python=3.7
+  - cudatoolkit
+  - cudf 
+  - cuml 
+  - cugraph
+  - dask-cuda
+  - dask-cudf
+  - pip:
+    - azureml-sdk[notebooks]
+    - mpi4py

@@ -18,6 +18,7 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
     parser.add_argument('--data')
+    parser.add_argument('--gpus')
     FLAGS, unparsed = parser.parse_known_args()
 
     #print('data path', FLAGS.data)
@@ -41,5 +42,9 @@ if __name__ == '__main__':
     
     if rank == 0:
         os.system('dask-scheduler')
+    elif rank == 1:
+        os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'  # Allow the 1st worker to grab the GPU assigned to the scheduler as well as it's own
+        os.system('dask-cuda-worker ' + scheduler)
     else:
-        os.system('dask-worker ' + scheduler)
+        os.environ['CUDA_VISIBLE_DEVICES'] = str(rank % int(FLAGS.gpus))  # Restrict each worker to their own GPU (assuming one GPU per worker)
+        os.system('dask-cuda-worker ' + scheduler)
