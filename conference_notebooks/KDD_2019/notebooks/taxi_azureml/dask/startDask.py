@@ -44,7 +44,7 @@ if __name__ == '__main__':
         os.system('dask-scheduler')
     elif rank == 1:
         os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'  # Allow the 1st worker to grab the GPU assigned to the scheduler as well as it's own
-        os.system('dask-cuda-worker ' + scheduler)
+        os.system('dask-cuda-worker ' + scheduler + ' --memory-limit 0')
     else:
         os.environ['CUDA_VISIBLE_DEVICES'] = str(rank % int(FLAGS.gpus))  # Restrict each worker to their own GPU (assuming one GPU per worker)
-        os.system('dask-cuda-worker ' + scheduler)
+        os.system('dask-cuda-worker ' + scheduler + ' --memory-limit 0')

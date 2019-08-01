@@ -4,8 +4,7 @@ channels:
   - conda-forge
   - nvidia 
   - rapidsai 
-  - numba 
-  - pytorch
+  - rapidsai/label/xgboost
     
 dependencies:
   - python=3.7
@@ -15,6 +14,11 @@ dependencies:
   - cugraph
   - dask-cuda
   - dask-cudf
+  - rapidsai/label/xgboost::xgboost=0.90.*
+  - rapidsai/label/xgboost::dask-xgboost=0.2.*
+  - dill
+  - nccl
+  - numba
   - pip:
     - azureml-sdk[notebooks]
     - mpi4py
