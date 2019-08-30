@@ -12,7 +12,7 @@ dependencies:
   - cudf 
   - cuml 
   - cugraph
-  - dask-cuda
+#   - dask-cuda  # Installing from master below
   - dask-cudf
   - rapidsai/label/xgboost::xgboost=0.90.*
   - rapidsai/label/xgboost::dask-xgboost=0.2.*
@@ -22,3 +22,5 @@ dependencies:
   - pip:
     - azureml-sdk[notebooks]
     - mpi4py
+    - git+https://github.com/mrocklin/distributed.git@resolve-address-get-cllient
+    - git+https://github.com/rapidsai/dask-cuda.git
